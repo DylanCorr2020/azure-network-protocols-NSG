@@ -26,13 +26,13 @@ Before proceeding, ensure you have the following:
 
 The following image provides a visual representation of the initial steps in creating a resource group within the Azure portal.
 
-![Create a resource group](NetworkImages/Create_a_resource_group.png)
+![Create a resource group](C:\Users\dylancorrGMIT\Desktop\NetworkImages\Create_a_resource_group.png)
 
 ### Step 1: Create a Resource Group
 
 The first step involves creating a resource group. This acts as a logical container to manage all the resources we will create for this lab.
 
-![Resource group creation details](NetworkImages/Resource_group_details.png)
+![Resource group creation details](C:\Users\dylancorrGMIT\Desktop\NetworkImages\NetworkImages/Resource_group_details.png)
 
 ### Step 2: Create the First Virtual Machine and the Initial Virtual Network
 
