@@ -3,19 +3,14 @@
 In this turtorial we will create two virtual machines and observe diffrent network protocals using Wireshark.
 
 
-# Environments and Technologies Used
+# Environment and Technologies Used
 Microsoft Azure (Virtual Machines/Compute)
 Remote Desktop
 Various Command-Line Tools
 Various Network Protocols (ICMP, SSH, DHCP, DNS, RDP)
 Wireshark (Protocol Analyzer)
 
-
-## Prerequisites
-
-Before proceeding, ensure you have the following:
-
-- An active Azure Tenant Subscription.
+# Part 1 Set Azure Environment
 
 
 ### Step 1: Create a Resource Group
@@ -24,12 +19,11 @@ The first step involves creating a resource group. This acts as a logical contai
 
 <img width="505" alt="Image" src="https://github.com/user-attachments/assets/96c28be2-c1e4-4912-95e3-de8ef9e2a7d4" />
 
-### Step 2: Create the First Virtual Machine and the Initial Virtual Network
-
-Next you will create two virtual machines.  
+### Step 2: Create the two Virtual Machines
 
 Create a Windows 10 Virtual Machine (VM). While creating the VM, select the previously created Resource Group . While creating the VM, allow it to create a new Virtual Network (Vnet) and Subnet. When selecting the OS select Windows 10 Pro Version 22H2 - 64X Gen2.
 When selecting size choose the following ensure it has 2 vcpus. Authentication type: Username/Password. 
+- **Note:** (agree to license agreement when selecting Windows OS)
 
 <img width="444" alt="Image" src="https://github.com/user-attachments/assets/67f09032-c14b-4a40-b00b-1ae0f00e4c97" />
 
@@ -38,45 +32,10 @@ When selecting size choose the following ensure it has 2 vcpus. Authentication t
 Create a Linux (Ubuntu) VM. While creating the VM, select the previously created Resource Group and Virtual Network—the Virtual Network MUST BE THE SAME. Authentication type: Username/Password. 
 Ensure both VMs are in the same Virtual Network / Subnet. Image can be Ubuntu server 22.04 and size can be 2vpcus and 8GB of memory.
 
-
-
 <img width="313" alt="Image" src="https://github.com/user-attachments/assets/385a42b5-7c2f-4516-97ed-c1084c5ae8da" />
 
 
-
-
-
-
-
-![Network configuration during VM creation](NetworkImages/network_configuration.png)
-
-- **Note:** (agree to license agreement when selecting Windows OS)
-
-![Windows license agreement](NetworkImages/windows_license.png)
-
-### Step 3: Create the Second Virtual Machine
-
-For our second virtual machine, we will deploy an Ubuntu Server.
-
-- We selected **Ubuntu Server 22.04 LTS** as the image. The size was kept as the default.
-
-![Ubuntu VM image selection](NetworkImages/ubuntu_vm_selection.png)
-
-- For the network settings of this second VM, we ensured it was placed within the **same virtual network** we created during the first VM deployment. We accepted the default subnet and did **not** assign a public IP address for this VM initially. We also observed that **no inbound port rules** are automatically created for Linux VMs by default.
-
-- For the network security group, we didn't create a new one and associated it with the existing one from the first VM.
-
-- Ensure it is in the same virtual network.
-
-### Step 4: Inspect the Network Security Group
-
-With both virtual machines deployed, our next step is to inspect the Network Security Group that was automatically created during the first VM's deployment. We will examine the default inbound and outbound security rules.
-
-### Step 5: Explore Network Protocols
-
-Finally, we will begin to explore different network protocols and how the Network Security Group affects communication between our two virtual machines.
-
-## Part 2: Analyzing Network Traffic and Security Group Behavior
+# Part Two Analyzing Network Traffic between our Virtual Machines
 
 Continuing from Part 1, we now delve into analyzing network traffic between our virtual machines and observing how the Network Security Group (NSG) affects this traffic.
 
@@ -93,9 +52,7 @@ Continuing from Part 1, we now delve into analyzing network traffic between our 
   - Download and install the Windows 64-bit installer from the official Wireshark website.
 
 - With Wireshark installed, we can view the traffic going from and to the Windows and Linux VMs.
-- Start capturing network traffic using Wireshark.
 
-  ![Wireshark Installation](NetworkImages/wiresharktrafficwo.png)
 
 ### Step 3: Filtering ICMP Traffic
 
