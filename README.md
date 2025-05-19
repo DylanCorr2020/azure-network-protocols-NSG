@@ -1,18 +1,15 @@
 # Exploring Network Security Groups and Network Protocols in Azure
 
-This document outlines the steps taken to explore Network Security Groups (NSGs) and network protocols within Microsoft Azure. This lab environment focuses on creating basic network infrastructure and observing the default and configurable network security behaviors.
+In this turtorial we will create two virtual machines and observe diffrent network protocals using Wireshark.
 
-## Lab Environment Setup
 
-In this lab, we will be creating the following resources within Azure:
+# Environments and Technologies Used
+Microsoft Azure (Virtual Machines/Compute)
+Remote Desktop
+Various Command-Line Tools
+Various Network Protocols (ICMP, SSH, DHCP, DNS, RDP)
+Wireshark (Protocol Analyzer)
 
-- **Resource Group:** A logical container for all our Azure resources.
-- **Virtual Network:** A private network within Azure, providing isolation for our virtual machines.
-- **Subnet:** A range of IP addresses within the Virtual Network.
-- **Two Virtual Machines (VMs):**
-  - One running Windows Server (Windows 10 Pro version 22H2 - 64-bit Gen2).
-  - One running Ubuntu Server 22.04 LTS.
-- **Network Security Group (NSG):** A virtual firewall containing a list of Access Control List (ACL) rules that allow or deny network traffic to resources connected to VNets (Virtual Networks).
 
 ## Prerequisites
 
@@ -20,33 +17,36 @@ Before proceeding, ensure you have the following:
 
 - An active Azure Tenant Subscription.
 
-## Part 1: Initial Setup and Connectivity
-
-### Visualisation
-
-The following image provides a visual representation of the initial steps in creating a resource group within the Azure portal.
-
-![Create a resource group](C:\Users\dylancorrGMIT\Desktop\NetworkImages\Create_a_resource_group.png)
 
 ### Step 1: Create a Resource Group
 
 The first step involves creating a resource group. This acts as a logical container to manage all the resources we will create for this lab.
 
-![Resource group creation details](C:\Users\dylancorrGMIT\Desktop\NetworkImages\NetworkImages/Resource_group_details.png)
+<img width="505" alt="Image" src="https://github.com/user-attachments/assets/96c28be2-c1e4-4912-95e3-de8ef9e2a7d4" />
 
 ### Step 2: Create the First Virtual Machine and the Initial Virtual Network
 
-Next, we proceed to create our first virtual machine. During this process, Azure will also prompt us to configure the virtual network and subnet.
+Next you will create two virtual machines.  
 
-- We selected **Windows 10 Pro version 22H2 - 64-bit Gen2** as the image for our first virtual machine.
+Create a Windows 10 Virtual Machine (VM). While creating the VM, select the previously created Resource Group . While creating the VM, allow it to create a new Virtual Network (Vnet) and Subnet. When selecting the OS select Windows 10 Pro Version 22H2 - 64X Gen2.
+When selecting size choose the following ensure it has 2 vcpus. Authentication type: Username/Password. 
 
-![Virtual machine image selection](NetworkImages/vm_image_selection.png)
+<img width="444" alt="Image" src="https://github.com/user-attachments/assets/67f09032-c14b-4a40-b00b-1ae0f00e4c97" />
 
-- When sizing the virtual machine, we ensured it had at least **2 vCPUs**.
 
-![Virtual machine size selection](NetworkImages/vm_size_selection.png)
 
-- We then configured the network settings during the VM creation. Azure automatically creates a virtual network and subnet if one doesn't already exist. We accepted the default settings for this initial setup, noting the automatically generated **Virtual network name**, **Subnet**, and **Public IP**. We also observed the default inbound port rule for **RDP (3389)** being automatically opened for remote access.
+Create a Linux (Ubuntu) VM. While creating the VM, select the previously created Resource Group and Virtual Network—the Virtual Network MUST BE THE SAME. Authentication type: Username/Password. 
+Ensure both VMs are in the same Virtual Network / Subnet. Image can be Ubuntu server 22.04 and size can be 2vpcus and 8GB of memory.
+
+
+
+<img width="313" alt="Image" src="https://github.com/user-attachments/assets/385a42b5-7c2f-4516-97ed-c1084c5ae8da" />
+
+
+
+
+
+
 
 ![Network configuration during VM creation](NetworkImages/network_configuration.png)
 
