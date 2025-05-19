@@ -25,14 +25,14 @@ Create a Windows 10 Virtual Machine (VM). While creating the VM, select the prev
 When selecting size choose the following ensure it has 2 vcpus. Authentication type: Username/Password. 
 - **Note:** (agree to license agreement when selecting Windows OS)
 
-<img width="444" alt="Image" src="https://github.com/user-attachments/assets/67f09032-c14b-4a40-b00b-1ae0f00e4c97" />
+<img width="505" alt="Image" src="https://github.com/user-attachments/assets/67f09032-c14b-4a40-b00b-1ae0f00e4c97" />
 
 
 
 Create a Linux (Ubuntu) VM. While creating the VM, select the previously created Resource Group and Virtual Network—the Virtual Network MUST BE THE SAME. Authentication type: Username/Password. 
 Ensure both VMs are in the same Virtual Network / Subnet. Image can be Ubuntu server 22.04 and size can be 2vpcus and 8GB of memory.
 
-<img width="313" alt="Image" src="https://github.com/user-attachments/assets/385a42b5-7c2f-4516-97ed-c1084c5ae8da" />
+<img width="505" alt="Image" src="https://github.com/user-attachments/assets/385a42b5-7c2f-4516-97ed-c1084c5ae8da" />
 
 
 # Part Two Analyzing Network Traffic between our Virtual Machines
