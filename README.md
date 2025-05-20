@@ -1,16 +1,16 @@
-# Exploring Network Security Groups and Network Protocols in Azure
+# Exploring Network Protocols in Azure
 
 In this turtorial we will create two virtual machines and observe diffrent network protocals using Wireshark.
 
 
 # Environment and Technologies Used
-Microsoft Azure (Virtual Machines/Compute)
-Remote Desktop
-Various Command-Line Tools
-Various Network Protocols (ICMP, SSH, DHCP, DNS, RDP)
-Wireshark (Protocol Analyzer)
+* Microsoft Azure (Virtual Machines/Compute)
+* Remote Desktop
+* Various Command-Line Tools
+* Various Network Protocols (ICMP, SSH, DHCP, DNS, RDP)
+* Wireshark (Protocol Analyzer)
 
-# Part 1 Set Azure Environment
+# Part One Set Azure Environment
 
 
 ### Step 1: Create a Resource Group
@@ -43,62 +43,45 @@ Continuing from Part 1, we now delve into analyzing network traffic between our 
 
 - We use Remote Desktop Connection to access the Windows VM.
 
-  ![Remote Desktop Connection](NetworkImages/RDP.png)
+  <img width="505" alt="Image" src="https://github.com/user-attachments/assets/beb2983c-9b67-4f73-a072-6d2529e5321f" />
 
 ### Step 2: Installing Wireshark
 
 - We will install Wireshark on the Windows VM to capture and analyze network traffic.
 
   - Download and install the Windows 64-bit installer from the official Wireshark website.
-
-- With Wireshark installed, we can view the traffic going from and to the Windows and Linux VMs.
-
+  - Download here: [Wireshark Official Website](https://www.wireshark.org/download.html)
 
 ### Step 3: Filtering ICMP Traffic
 
-- To test connectivity, we will use the `ping` command. Specifically, we will ping the Ubuntu VM (Linux VM1) from the Windows VM using its private IP address (10.0.0.5).
-
-  ![Ping Request](NetworkImages/ICMP.png)
+- To test connectivity, we will use the `ping` command. Specifically, we will ping the Ubuntu VM (Linux VM) from the Windows VM using its private IP address (10.0.0.5).
 
 - In Wireshark, we filter for ICMP traffic to focus on the `ping` requests and replies.
 
-  ![Wireshark ICMP Filter](NetworkImages/ICMPTwo.png)
+  <img width="505" alt="Image" src="https://github.com/user-attachments/assets/ab2a8bf9-f604-4063-b4d1-3be8fcb21a35" />
 
 - We observe the ping requests and replies in Wireshark, confirming basic network connectivity.
 
-### Step 4: Firewall Configuration
+### Step 4: NSG Configuration
 
-- Ensure the firewall is configured correctly on both VMs to allow ICMP traffic, if necessary.
+- Initiate a perpetual/non-stop ping from your Windows 10 VM to your Ubuntu VM.
+- Open the Network Security Group your Linux VM is using and disable incoming (inbound) ICMP traffic
 
-  ![Firewall Configuration](NetworkImages/SecurityGroupLinuxVM.png)
 
-- Continue the non-stop ping from the Windows machine to the Linux machine.
+  <img width="505" alt="Image" src="https://github.com/user-attachments/assets/70caca35-2867-4b26-a9ba-6aba3266b48f" />
 
-  ![Continuous Ping](NetworkImages/NonStopPing.png)
+  
+- Back in the Windows 10 VM, observe the ICMP traffic in WireShark and the command line Ping activity
 
-- Wireshark captures the pings.
+  
+<img width="505" alt="Image" src="https://github.com/user-attachments/assets/12523efd-509f-4d3c-b584-801539bef4d7" />
 
-### Step 5: Network Security Group Blocking ICMP
 
-- Next, we will modify the Network Security Group associated with the Linux VM to block ICMP traffic. This will simulate a firewall rule.
-
-  ![NSG Block ICMP](NetworkImages/ICMPtrafficblocked.png)
-
-- After applying the rule, we observe that the `ping` requests from the Windows VM no longer receive replies, demonstrating the NSG's effect.
-
-  ![Blocked Pings](NetworkImages/RequestTimedOut.png)
-
-### Step 6: Removing the Security Group Rule
-
-- Finally, we remove the rule blocking ICMP traffic in the Network Security Group.
-
-- Connectivity should be restored, and `ping` requests should again receive replies.
-
-## Part 3: Exploring SSH Traffic and DHCP
+## Part 5: Exploring SSH Traffic and DHCP
 
 In this final part of our lab, we will investigate SSH traffic, observe the DHCP process, and analyze DNS queries using Wireshark.
 
-### Step 1: Analyzing SSH Traffic
+### Step 6: Analyzing SSH Traffic
 
 - Start a packet capture in Wireshark and filter for SSH traffic.
 
@@ -116,7 +99,7 @@ In this final part of our lab, we will investigate SSH traffic, observe the DHCP
 
 - All traffic is encrypted when using SSH, making the content unreadable in Wireshark without decryption keys.
 
-### Step 2: Observing DHCP
+### Step 7: Observing DHCP
 
 - From the Windows VM, we will release its current IP address and request a new one from the DHCP server. We will then observe this DHCP traffic in Wireshark.
 
@@ -133,7 +116,7 @@ In this final part of our lab, we will investigate SSH traffic, observe the DHCP
 
   ![Wireshark DHCP Traffic](NetworkImages/DHCP.png)
 
-### Step 3: Analyzing DNS Traffic
+### Step 8: Analyzing DNS Traffic
 
 - Back in Wireshark, filter for DNS traffic.
 
@@ -149,7 +132,7 @@ In this final part of our lab, we will investigate SSH traffic, observe the DHCP
 
   ![Wireshark DNS Traffic](NetworkImages/DNSLookup.png)
 
-### Step 4: Analyzing HTTP Traffic (Non-Stop Spam?)
+### Step 9: Analyzing HTTP Traffic (Non-Stop Spam?)
 
 - Now, let's filter Wireshark for HTTP traffic.
 
