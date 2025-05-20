@@ -77,25 +77,17 @@ Continuing from Part 1, we now delve into analyzing network traffic between our 
 <img width="505" alt="Image" src="https://github.com/user-attachments/assets/12523efd-509f-4d3c-b584-801539bef4d7" />
 
 
-## Part 5: Exploring SSH Traffic and DHCP
-
-In this final part of our lab, we will investigate SSH traffic, observe the DHCP process, and analyze DNS queries using Wireshark.
-
 ### Step 6: Analyzing SSH Traffic
 
-- Start a packet capture in Wireshark and filter for SSH traffic.
+- Start a packet capture in Wireshark and filter for SSH traffic on the Windows 10 VM.
 
-- Use SSH to connect from the Windows VM to the Linux VM. You'll need an SSH client (like PuTTY on Windows). Ensure the SSH server is running on the Linux VM (it usually is by default).
+- Open PowerShell, and type: ssh labuser@<private IP address>
 
-- You might need to open port 22 on the Linux VM's Network Security Group if you haven't already.
+- Type commands (username, pwd, etc) into the linux SSH connection and observe SSH traffic spam in WireShark
 
-- Use the Linux VM's private IP address (10.0.0.5) to connect.
+- Exit the SSH connection by typing ‘exit’ and pressing [Enter]
 
-  ![SSH Connection Attempt](NetworkImages/SHHLinuxVM.png)
-
-- When prompted, enter the password for your user on the Linux VM.
-
-  ![Wireshark SSH Traffic](NetworkImages/wiresharktrafficpng.png)
+<img width="505" alt="Image" src="https://github.com/user-attachments/assets/3c9bafdc-d424-46b9-8f62-4e8c415c632f" />
 
 - All traffic is encrypted when using SSH, making the content unreadable in Wireshark without decryption keys.
 
