@@ -47,12 +47,13 @@ Continuing from Part 1, we now delve into analyzing network traffic between our 
 
 ### Step 2: Installing Wireshark
 
-- We will install Wireshark on the Windows VM to capture and analyze network traffic.
-
-  - Download and install the Windows 64-bit installer from the official Wireshark website.
-  - Download here: [Wireshark Official Website](https://www.wireshark.org/download.html)
+-   We will install Wireshark on the Windows VM to capture and analyze network traffic.
+-   Download and install the Windows 64-bit installer from the official Wireshark website.
+-   Download here: [Wireshark Official Website](https://www.wireshark.org/download.html)
 
 ### Step 3: Filtering ICMP Traffic
+
+- ICMP (Internet Control Message Protocol): Used for error reporting and network diagnostics. It doesn't use a specific port in the traditional sense, but rather relies on IP directly.
 
 - To test connectivity, we will use the `ping` command. Specifically, we will ping the Ubuntu VM (Linux VM) from the Windows VM using its private IP address (10.0.0.5).
 
@@ -62,22 +63,24 @@ Continuing from Part 1, we now delve into analyzing network traffic between our 
 
 - We observe the ping requests and replies in Wireshark, confirming basic network connectivity.
 
-### Step 4: NSG Configuration
+### Step 4: NSG Configuration to disable incoming (inbound) ICMP traffic
 
-- Initiate a perpetual/non-stop ping from your Windows 10 VM to your Ubuntu VM.
+- Initiate a perpetual/non-stop ping from your Windows 10 VM to your Linux VM.
 - Open the Network Security Group your Linux VM is using and disable incoming (inbound) ICMP traffic
 
 
   <img width="505" alt="Image" src="https://github.com/user-attachments/assets/70caca35-2867-4b26-a9ba-6aba3266b48f" />
 
   
-- Back in the Windows 10 VM, observe the ICMP traffic in WireShark and the command line Ping activity
+- Back in the Windows 10 VM, observe the ICMP traffic in WireShark and the command line Ping activity. The windows VM should not be able to ping the Linux VM request times out.
 
   
 <img width="505" alt="Image" src="https://github.com/user-attachments/assets/12523efd-509f-4d3c-b584-801539bef4d7" />
 
 
 ### Step 6: Analyzing SSH Traffic
+
+- SSH (Secure Shell): Provides a secure encrypted connection for remote login and command execution. Port 22.
 
 - Start a packet capture in Wireshark and filter for SSH traffic on the Windows 10 VM.
 
@@ -93,6 +96,8 @@ Continuing from Part 1, we now delve into analyzing network traffic between our 
 
 ### Step 7: Observing DHCP
 
+- DHCP (Dynamic Host Configuration Protocol): Automatically assigns IP addresses and other network configuration to devices on a network. Ports 67 (server) and 68 (client).
+
 - From the Windows VM, we will release its current IP address and request a new one from the DHCP server. We will then observe this DHCP traffic in Wireshark.
 
 - Open Command Prompt on the Windows VM and run the following commands:
@@ -102,36 +107,40 @@ Continuing from Part 1, we now delve into analyzing network traffic between our 
   ipconfig /renew
   ```
 
-  ![IP Release and Renew](NetworkImages/DHCP.png)
-
 - Observe the DHCP traffic in Wireshark. Filter for `dhcp` to see the DHCP Discover, Offer, Request, and Acknowledge (DORA) process.
 
-  ![Wireshark DHCP Traffic](NetworkImages/DHCP.png)
+<img width="505" alt="Image" src="https://github.com/user-attachments/assets/ba1dd7ee-38a2-478b-b632-3a5f6312e20e" />
+
 
 ### Step 8: Analyzing DNS Traffic
 
+- DNS (Domain Name System): Translates human-readable domain names into IP addresses. Port 53.
+
 - Back in Wireshark, filter for DNS traffic.
 
-- On the Windows VM, use the `nslookup` command to query the IP address of a website (e.g., `nslookup google.com`).
+- On the Windows VM, use the `nslookup` command to query the IP address of a website (e.g., `nslookup disney.com`).
 
   ```bash
   nslookup google.com
   ```
 
-  ![DNS Lookup](NetworkImages/DNSLookup.png)
+  - Observe the DNS query and response in Wireshark. You should see the Windows VM sending a DNS query to the configured DNS server, and the server responding with the IP address of `disney.com`.
+ 
+  <img width="505" alt="Image" src="https://github.com/user-attachments/assets/21b29306-7ccf-4724-89ba-ae7012fe48a2" />
 
-- Observe the DNS query and response in Wireshark. You should see the Windows VM sending a DNS query to the configured DNS server, and the server responding with the IP address of `google.com`.
+### Step 9: Analyzing RDP Traffic
 
-  ![Wireshark DNS Traffic](NetworkImages/DNSLookup.png)
+-  RDP (Remote Desktop Protocol): Allows a user to graphically control a remote computer. Port 3389.
+-  Back in Wireshark, filter for RDP traffic only (tcp.port == 3389)
+-  Observe the immediate non-stop spam of traffic
+-  RDP (protocol) is constantly showing you a live stream from one computer to another, therefor traffic is always being transmitted.
 
-### Step 9: Analyzing HTTP Traffic (Non-Stop Spam?)
+  <img width="505" alt="Image" src="https://github.com/user-attachments/assets/144d152e-aa85-4ff9-9765-1db14b5d3327" />
 
-- Now, let's filter Wireshark for HTTP traffic.
+# Conclusion 
 
-- The observation here suggests a large amount of HTTP traffic that might appear as "non-stop spam." This could be due to various background processes on the VMs or network activity.
+- 	Close your Remote Desktop connection. Delete the Resource Group(s) created at the beginning of this lab. Verify Resource Group Deletion
 
-- Observing the immediate non-stop spam of HTTP traffic after applying the filter might indicate persistent communication or telemetry being sent. Analyzing the details of these packets in Wireshark would be necessary to understand the source and destination of this traffic.
+-   This concludes our exploration of network protocols and security using Azure and Wireshark. We've examined ICMP blocking with NSGs, analyzed encrypted SSH communication, observed the DHCP process, DNS queries and RDP Traffic . 
 
-  ![Wireshark HTTP Spam](NetworkImages/wireSharkHTTP.png)
 
-This concludes our exploration of network protocols and security using Azure and Wireshark. We've examined ICMP blocking with NSGs, analyzed encrypted SSH communication, observed the DHCP process, and looked at DNS queries. The "HTTP spam" observation highlights the importance of understanding background network activity within virtual machines.
