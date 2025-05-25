@@ -25,7 +25,7 @@ Create a Windows 10 Virtual Machine (VM). While creating the VM, select the prev
 When selecting size choose the following ensure it has 2 vcpus. Authentication type: Username/Password. 
 - **Note:** (agree to license agreement when selecting Windows OS)
 
-<img width="505" alt="Image" src="https://github.com/user-attachments/assets/67f09032-c14b-4a40-b00b-1ae0f00e4c97" />
+<img width="700" alt="Image" src="https://github.com/user-attachments/assets/67f09032-c14b-4a40-b00b-1ae0f00e4c97" />
 
 
 
