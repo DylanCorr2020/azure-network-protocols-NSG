@@ -21,16 +21,26 @@ The first step involves creating a resource group. This acts as a logical contai
 
 ### Step 2: Create the two Virtual Machines
 
-Create a Windows 10 Virtual Machine (VM). While creating the VM, select the previously created Resource Group . While creating the VM, allow it to create a new Virtual Network (Vnet) and Subnet. When selecting the OS select Windows 10 Pro Version 22H2 - 64X Gen2.
-When selecting size choose the following ensure it has 2 vcpus. Authentication type: Username/Password. 
-- **Note:** (agree to license agreement when selecting Windows OS)
+Creating a Windows 10 Virtual Machine
+When creating your Windows 10 VM, follow these steps:
+
+- Resource Group: Select the previously created Resource Group.
+- Networking: Allow the VM creation process to create a new Virtual Network (VNet) and Subnet.
+- Operating System: Choose Windows 10 Pro, Version 22H2 - 64x Gen2.
+- Note: Be sure to agree to the license agreement when selecting the Windows OS.
+- Size: Select a VM size that includes 2 vCPUs.
+- Authentication Type: Set this to Username/Password.
 
 <img width="700" alt="Image" src="https://github.com/user-attachments/assets/67f09032-c14b-4a40-b00b-1ae0f00e4c97" />
 
+Creating a Linux (Ubuntu) Virtual Machine
+When creating your Ubuntu VM, ensure it's configured to be in the same network as your Windows 10 VM:
 
-
-Create a Linux (Ubuntu) VM. While creating the VM, select the previously created Resource Group and Virtual Network—the Virtual Network MUST BE THE SAME. Authentication type: Username/Password. 
-Ensure both VMs are in the same Virtual Network / Subnet. Image can be Ubuntu server 22.04 and size can be 2vpcus and 8GB of memory.
+- Resource Group: Select the previously created Resource Group.
+- Virtual Network: Crucially, select the SAME Virtual Network (VNet) that was created for your Windows 10 VM. This ensures both VMs are in the same VNet and Subnet.
+- Image: Choose Ubuntu Server 22.04 LTS.
+- Size: Select a VM size with 2 vCPUs and 8 GB of memory.
+- Authentication Type: Set this to Username/Password.
 
 <img width="505" alt="Image" src="https://github.com/user-attachments/assets/385a42b5-7c2f-4516-97ed-c1084c5ae8da" />
 
@@ -82,7 +92,7 @@ Continuing from Part 1, we now delve into analyzing network traffic between our 
 
 - SSH (Secure Shell): Provides a secure encrypted connection for remote login and command execution. Port 22.
 
-- Start a packet capture in Wireshark and filter for SSH traffic on the Windows 10 VM. From Windows 10 VM, we will SHH into the linux VM using it's private ip address.
+- Start a packet capture in Wireshark and filter for SSH traffic on the Windows 10 VM. From Windows 10 VM, we will SSH into the linux VM using it's private ip address.
 
 - Open PowerShell, and type: ssh labuser@(linux private IP address)
 
