@@ -82,9 +82,9 @@ Continuing from Part 1, we now delve into analyzing network traffic between our 
 
 - SSH (Secure Shell): Provides a secure encrypted connection for remote login and command execution. Port 22.
 
-- Start a packet capture in Wireshark and filter for SSH traffic on the Windows 10 VM.
+- Start a packet capture in Wireshark and filter for SSH traffic on the Windows 10 VM. From Windows 10 VM, we will SHH into the linux VM using it's private ip address.
 
-- Open PowerShell, and type: ssh labuser@(private IP address)
+- Open PowerShell, and type: ssh labuser@(linux private IP address)
 
 - Type commands (username, pwd, etc) into the linux SSH connection and observe SSH traffic spam in WireShark
 
