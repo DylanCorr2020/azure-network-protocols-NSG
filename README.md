@@ -84,7 +84,7 @@ Continuing from Part 1, we now delve into analyzing network traffic between our 
 
 - Start a packet capture in Wireshark and filter for SSH traffic on the Windows 10 VM.
 
-- Open PowerShell, and type: ssh labuser@<private IP address>
+- Open PowerShell, and type: ssh labuser@(private IP address)
 
 - Type commands (username, pwd, etc) into the linux SSH connection and observe SSH traffic spam in WireShark
 
